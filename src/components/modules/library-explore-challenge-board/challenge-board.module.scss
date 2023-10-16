@@ -1,0 +1,147 @@
+// 영어독서왕 스코어보드
+.challenge_board {
+  margin-top: var(--space-m);
+  .header {
+    height: 120px;
+    padding: var(--space-m) var(--space-xl);
+    border-radius: 15px 15px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #98cbe5;
+    position: relative;
+    .txt_h {
+      color: var(--white);
+      font-size: var(--text-xl);
+      font-weight: 600;
+    }
+    .line {
+      height: 2px;
+      width: 35%;
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+    .challenge_symbol {
+      position: absolute;
+      left: calc(50% - 110px);
+      bottom: -20px;
+    }
+    .challenge_period {
+      color: var(--white);
+      font-size: var(--text-l);
+      font-weight: 600;
+    }
+  }
+  .body {
+    border: 2px solid #98cbe5;
+    border-radius: 0 0 15px 15px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-m);
+    padding: var(--space-m);
+  }
+}
+
+// 영어독서왕 스코어보드 > 나의목표설정
+.my_goal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  .txt_h {
+    font-size: var(--text-d-1);
+    font-weight: 600;
+  }
+  .goal {
+    min-height: 250px;
+    background-color: #ebf5ff;
+    padding: var(--space-m);
+    border-radius: var(--round-m);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-s);
+    .goal_container {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xxs);
+      .goal_name {
+        font-size: var(--text-xl);
+        font-weight: 700;
+        padding-left: var(--space-l);
+      }
+    }
+    .goal_info {
+      font-size: var(--text-s);
+      color: var(--gray1);
+      margin-bottom: var(--space-xxs);
+    }
+  }
+}
+
+// 영어독서왕 스코어보드 > 챌린지 참여현황
+.my_progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  .txt_h {
+    font-size: var(--text-d-1);
+    font-weight: 600;
+  }
+  .progress_group {
+    height: 100%;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    gap: var(--space-s);
+  }
+}
+
+// 영어독서왕 스코어보드 > 챌린지 참여현황 > 프로그래스
+.challenge_progress {
+  background-color: var(--gray2);
+  border-radius: var(--round-m);
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  .progress_info {
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    gap: var(--space-xxs);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    color: var(--white);
+    padding: var(--space-s) var(--space-m);
+    font-weight: 500;
+    font-size: var(--text-s);
+    z-index: 1;
+    .row_a,
+    .row_b {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xxs);
+    }
+    .txt_d {
+      font-size: var(--text-xl);
+    }
+    .comment {
+      opacity: 0.7;
+    }
+  }
+  .progress_bar {
+    height: 100%;
+    min-width: 1%;
+    border-radius: var(--round-m);
+    transition: width 1s;
+    &.green {
+      background-color: var(--green);
+    }
+    &.blue {
+      background-color: var(--blue);
+    }
+    &.orange {
+      background-color: var(--orange);
+    }
+  }
+}

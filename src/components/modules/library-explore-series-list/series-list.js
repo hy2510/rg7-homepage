@@ -1,9 +1,7 @@
-import styles from "./series-list.module.scss";
+import style from "./series-list.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import { AlertBar } from "@/components/common/common-components";
-
-const style = styles;
 
 // 학습메인 > 사용자의 학습레벨의 시리즈 리스트
 export function SeriesList({ children }) {
@@ -21,7 +19,13 @@ export function SeriesItem({ seriesImgSrc, href }) {
   return (
     <Link href={href ? href : "/"}>
       <div className={style.series_item}>
-        <Image src={seriesImgSrc} layout="intrinsic" width={200} height={200} />
+        <Image
+          alt=""
+          src={seriesImgSrc}
+          layout="intrinsic"
+          width={200}
+          height={200}
+        />
       </div>
     </Link>
   );

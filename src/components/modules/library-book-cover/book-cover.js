@@ -1,11 +1,9 @@
 "use client";
 
 import { AlertBox, Button, Modal } from "@/components/common/common-components";
-import styles from "./book-cover.module.scss";
+import style from "./book-cover.module.scss";
 import Image from "next/image";
 import { useState } from "react";
-
-const style = styles;
 
 // 도서 아이템
 export function BookCover({
@@ -18,25 +16,106 @@ export function BookCover({
   earnPoint,
   isToDoOn,
   isFavoriteOn,
-  key,
+  isAssignedTodo,
+  isPassed1,
+  isPassedAll,
+  hasMovieSrc,
+  id,
+  onClickCheck,
+  isExportMode,
+  isDeleteMode,
 }) {
   const [isBookInfoActive, _isBookInfoActive] = useState(false);
+  const [isCheckActive, _isCheckActive] = useState(false);
 
   return (
     <>
-      <div className={style.book_cover} key={key}>
+      <div className={style.book_cover} key={id}>
         <div className={style.container}>
-          <Image
-            src={bookImgSrc}
-            layout="intrinsic"
-            width={200}
-            height={200}
-            className={style.book_image}
-            onClick={() => {
-              _isBookInfoActive(true);
-            }}
-            art=""
-          />
+          <div className={style.study_status}>
+            {isAssignedTodo && (
+              <div className={style.assigned_todo}>
+                <Image
+                  alt=""
+                  src="/src/images/@book-cover/assigned_todo.svg"
+                  width={34}
+                  height={34}
+                />
+              </div>
+            )}
+            {isPassed1 && isPassedAll ? (
+              <div className={style.passed_all}>
+                <Image
+                  alt=""
+                  src="/src/images/@book-cover/passed_all.svg"
+                  width={34}
+                  height={34}
+                />
+              </div>
+            ) : (
+              isPassed1 && (
+                <div className={style.passed_1}>
+                  <Image
+                    alt=""
+                    src="/src/images/@book-cover/passed_1.svg"
+                    width={34}
+                    height={34}
+                  />
+                </div>
+              )
+            )}
+          </div>
+          <div className={style.book_image}>
+            {isExportMode || isDeleteMode ? (
+              <div
+                className={style.check_box}
+                id={id}
+                onClick={() => {
+                  onClickCheck
+                    ? isCheckActive
+                      ? _isCheckActive(false) // 체크박스 체크시 일괄 작업 실행 명령어가 들어갈 자리
+                      : _isCheckActive(true)
+                    : null;
+                }}
+              >
+                {isCheckActive ? (
+                  <Image
+                    src="/src/images/check-icons/check_box_on.svg"
+                    width={24}
+                    height={24}
+                  />
+                ) : (
+                  <Image
+                    src="/src/images/check-icons/check_box_off.svg"
+                    width={24}
+                    height={24}
+                  />
+                )}
+              </div>
+            ) : null}
+            {hasMovieSrc && (
+              <div className={style.movie_icon}>
+                <Image
+                  alt=""
+                  src="/src/images/@book-cover/movie_src.svg"
+                  width={34}
+                  height={34}
+                />
+              </div>
+            )}
+            <Image
+              alt=""
+              src={bookImgSrc}
+              layout="intrinsic"
+              width={200}
+              height={200}
+              className={style.book_image_src}
+              onClick={() => {
+                _isBookInfoActive(true);
+              }}
+              art=""
+            />
+          </div>
           {bookCode && (
             <div className={style.tag}>
               <span>{bookCode}</span>
@@ -112,12 +191,14 @@ export function BookInfoModal({
                   >
                     {isFavoriteOn ? (
                       <Image
+                        alt=""
                         src="/src/images/@book-info/add_favorite_on.svg"
                         width={24}
                         height={24}
                       />
                     ) : (
                       <Image
+                        alt=""
                         src="/src/images/@book-info/add_favorite_off.svg"
                         width={24}
                         height={24}
@@ -167,12 +248,14 @@ export function BookInfoModal({
                   >
                     {isToDoOn ? (
                       <Image
+                        alt=""
                         src="/src/images/@book-info/add_to_do_on.svg"
                         width={24}
                         height={24}
                       />
                     ) : (
                       <Image
+                        alt=""
                         src="/src/images/@book-info/add_to_do_off.svg"
                         width={24}
                         height={24}
@@ -217,6 +300,7 @@ export function BookInfoModal({
               <div className={style.book_container}>
                 <div className={style.book_image}>
                   <Image
+                    alt=""
                     src={bookImgSrc}
                     layout="intrinsic"
                     width={200}
@@ -230,6 +314,7 @@ export function BookInfoModal({
                 <div className={style.download_voca}>
                   <span>단어장</span>
                   <Image
+                    alt=""
                     src="/src/images/@book-info/download.svg"
                     width={14}
                     height={14}
@@ -238,6 +323,7 @@ export function BookInfoModal({
                 <div className={style.download_worksheet}>
                   <span>워크시트</span>
                   <Image
+                    alt=""
                     src="/src/images/@book-info/download.svg"
                     width={14}
                     height={14}
@@ -256,6 +342,7 @@ export function BookInfoModal({
             <div className={style.txt_h}>학습 정보</div>
             <div className={style.delete_button} onClick={onClickDelete}>
               <Image
+                alt=""
                 src="/src/images/delete-icons/x_black.svg"
                 width={28}
                 height={28}

@@ -1,4 +1,6 @@
-import styles from "./page.module.scss";
+"use client";
+
+import style from "./page.module.scss";
 import Image from "next/image";
 import {
   BackLink,
@@ -11,17 +13,22 @@ import { StudyLevelSelector } from "@/components/modules/library-find-study-leve
 import { BookList } from "@/components/modules/library-find-book-list/book-list";
 import { BookCover } from "@/components/modules/library-book-cover/book-cover";
 import bookData from "@/app/library/sample-data-book-finder.json";
-
-const style = styles;
+import { useState } from "react";
 
 export default function Page() {
+  const [isExportMode, _isExportMode] = useState(false);
+
   return (
     <main className={style.pbook_quiz}>
       <BackLink href="/library/explore" largeFont>
         pBook Quiz
       </BackLink>
       <StudyLevelSelector />
-      <BookList count={50}>
+      <BookList
+        count={50}
+        isExportMode={isExportMode}
+        _isExportMode={_isExportMode}
+      >
         {bookData.map((a, i) => {
           return (
             <BookCover
@@ -33,6 +40,8 @@ export default function Page() {
               summary={a.summary}
               addedToDo={a.addedToDo}
               addedFavorite={a.addedFavorite}
+              onClickCheck
+              isExportMode={isExportMode}
             />
           );
         })}
@@ -40,6 +49,7 @@ export default function Page() {
       <Pagination>
         <PaginationItem>
           <Image
+            alt=""
             src="/src/images/arrow-icons/chv_left.svg"
             width={20}
             height={20}
@@ -52,6 +62,7 @@ export default function Page() {
         <PaginationItem active={false}>5</PaginationItem>
         <PaginationItem>
           <Image
+            alt=""
             src="/src/images/arrow-icons/chv_right.svg"
             width={20}
             height={20}

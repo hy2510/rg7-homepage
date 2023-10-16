@@ -1,7 +1,5 @@
-import styles from "./todo-list.module.scss";
+import style from "./todo-list.module.scss";
 import Link from "next/link";
-
-const style = styles;
 
 // 학습메인 > 사용자의 진행중인 학습 리스트
 export function ExpTodoList({ children }) {

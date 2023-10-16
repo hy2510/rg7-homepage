@@ -1,4 +1,6 @@
-import styles from "./page.module.scss";
+"use client";
+
+import style from "./page.module.scss";
 import {
   AlertBar,
   Dropdown,
@@ -9,10 +11,19 @@ import {
 import { BookCover } from "@/components/modules/library-book-cover/book-cover";
 import bookData from "@/app/library/sample-data-book-finder.json";
 import Image from "next/image";
-
-const style = styles;
+import { useState } from "react";
+import {
+  ExportItem,
+  ExportModePanel,
+} from "@/components/modules/library-export-mode-panel/export-mode-panel";
 
 export default function Page() {
+  const [isExportMode, _isExportMode] = useState(false);
+  const [isDeleteMode, _isDeleteMode] = useState(false);
+  const [isVocaSelected, _isVocaSelected] = useState(true);
+  const [isListSelected, _isListSelected] = useState(false);
+  const [isTodoSelected, _isTodoSelected] = useState(false);
+
   return (
     <main className={style.to_do}>
       <AlertBar>
@@ -25,7 +36,7 @@ export default function Page() {
           <Dropdown title="총 10권">
             <DropdownItem>목록 다운로드</DropdownItem>
             <DropdownItem>
-              <span className="color-red">목록 전체 삭제</span>
+              <span className="color-red">과제 전체삭제</span>
             </DropdownItem>
           </Dropdown>
           <Dropdown title="등록일순">
@@ -34,7 +45,24 @@ export default function Page() {
             <DropdownItem>학습전 우선</DropdownItem>
           </Dropdown>
         </div>
-        <div className={style.txt_l}>편집</div>
+        <div className="flex gap-m">
+          <div
+            className={style.txt_l}
+            onClick={() => {
+              isExportMode ? _isExportMode(false) : _isExportMode(true);
+            }}
+          >
+            {isDeleteMode ? null : isExportMode ? "작업 취소" : "내보내기"}
+          </div>
+          <div
+            className={style.txt_l}
+            onClick={() => {
+              isDeleteMode ? _isDeleteMode(false) : _isDeleteMode(true);
+            }}
+          >
+            {isExportMode ? null : isDeleteMode ? "삭제 취소" : "삭제"}
+          </div>
+        </div>
       </div>
       <div className={style.to_do_list}>
         {bookData.map((a) => {
@@ -47,6 +75,9 @@ export default function Page() {
               todo={a.todo}
               favorite={a.favorite}
               assignDate={a.assignDate}
+              onClickCheck
+              isExportMode={isExportMode}
+              isDeleteMode={isDeleteMode}
             />
           );
         })}
@@ -54,6 +85,7 @@ export default function Page() {
       <Pagination>
         <PaginationItem>
           <Image
+            alt=""
             src="/src/images/arrow-icons/chv_left.svg"
             width={20}
             height={20}
@@ -66,12 +98,40 @@ export default function Page() {
         <PaginationItem active={false}>5</PaginationItem>
         <PaginationItem>
           <Image
+            alt=""
             src="/src/images/arrow-icons/chv_right.svg"
             width={20}
             height={20}
           />
         </PaginationItem>
       </Pagination>
+      {/* 내보내기 모드 실행시 */}
+      {isExportMode && (
+        <ExportModePanel>
+          <ExportItem
+            isVocaSelected={isVocaSelected}
+            onClick={() => {
+              _isVocaSelected(true);
+              _isListSelected(false);
+            }}
+          >
+            Vocabulary
+          </ExportItem>
+          <ExportItem
+            isListSelected={isListSelected}
+            onClick={() => {
+              _isVocaSelected(false);
+              _isListSelected(true);
+            }}
+          >
+            Book List
+          </ExportItem>
+        </ExportModePanel>
+      )}
+      {/* 일괄삭제 모드 실행시 */}
+      {isDeleteMode && (
+        <ExportModePanel buttonName="선택한 과제를 삭제하기"></ExportModePanel>
+      )}
     </main>
   );
 }

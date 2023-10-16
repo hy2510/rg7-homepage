@@ -1,11 +1,10 @@
 "use client";
 
-import styles from "./book-search-bar.module.scss";
+import style from "./book-search-bar.module.scss";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "@/components/common/common-components";
 
-const style = styles;
 const bookSearchBarCategoryData = [
   {
     title: "기초 학습",
@@ -64,6 +63,7 @@ export const BookSearchBar = () => {
         />
         <Button roundFull shadow color={"blue"} width={"115px"}>
           <Image
+            alt=""
             src="/src/images/search-icons/search_white.svg"
             width={20}
             height={20}
@@ -122,7 +122,7 @@ export const BookSearchBarCategoryItem = ({
       }}
       key={key}
     >
-      <Image alt="" src={imgSrc} width={60} height={60} />
+      <Image alt="" alt="" src={imgSrc} width={60} height={60} />
       <div className={style.col}>
         <div className={style.txt_h}>{title}</div>
         <div className={style.txt_p}>{comment}</div>

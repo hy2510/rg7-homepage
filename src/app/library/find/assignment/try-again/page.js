@@ -1,4 +1,4 @@
-import styles from "./page.module.scss";
+import style from "./page.module.scss";
 import Image from "next/image";
 import {
   AlertBar,
@@ -7,8 +7,6 @@ import {
 } from "@/components/common/common-components";
 import { BookCover } from "@/components/modules/library-book-cover/book-cover";
 import bookData from "@/app/library/sample-data-book-finder.json";
-
-const style = styles;
 
 export default function Page() {
   return (
@@ -35,6 +33,7 @@ export default function Page() {
       <Pagination>
         <PaginationItem>
           <Image
+            alt=""
             src="/src/images/arrow-icons/chv_left.svg"
             width={20}
             height={20}
@@ -47,6 +46,7 @@ export default function Page() {
         <PaginationItem active={false}>5</PaginationItem>
         <PaginationItem>
           <Image
+            alt=""
             src="/src/images/arrow-icons/chv_right.svg"
             width={20}
             height={20}

@@ -1,8 +1,6 @@
-import styles from "./global-footer.module.scss";
+import style from "./global-footer.module.scss";
 import Image from "next/image";
 import Link from "next/link";
-
-const style = styles;
 
 // 공통하단
 export default function Gfooter() {

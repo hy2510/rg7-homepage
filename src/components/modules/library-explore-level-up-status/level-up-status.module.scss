@@ -13,6 +13,12 @@
       align-items: center;
       justify-content: space-between;
       gap: var(--space-s);
+      .dropdown {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: var(--space-xxs);
+      }
       .txt_h {
         font-size: var(--text-d-1);
         font-weight: 600;

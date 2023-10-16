@@ -6,6 +6,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "wcfresource.a1edu.com",
       },
+      {
+        protocol: "http",
+        hostname: "wcfresource.a1edu.com",
+      },
     ],
   },
 };

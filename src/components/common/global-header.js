@@ -1,11 +1,9 @@
 "use client";
 
-import styles from "./global-header.module.scss";
+import style from "./global-header.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-
-const style = styles;
 
 // 공통상단
 export default function Gheader({ children }) {
@@ -14,6 +12,7 @@ export default function Gheader({ children }) {
       <div className={`${style.global_header_container} container`}>
         <div className={style.company_logo}>
           <Image
+            alt=""
             src="/src/images/@global-header/company_logo_white.svg"
             width={48}
             height={40}
@@ -113,7 +112,7 @@ const GnbButton = ({ menuName, active, href, imgSrc }) => {
   return (
     <Link href={href}>
       <div className={`${style.gnb_button} ${active && style.active}`}>
-        <Image src={imgSrc} width={24} height={24} />
+        <Image alt="" src={imgSrc} width={24} height={24} />
         <span>{menuName}</span>
       </div>
     </Link>
@@ -151,6 +150,7 @@ const OptionButton = ({ isCalendar, isAvatar, onClick, imgSrc }) => {
             </div>
             <div className={style.calendar_icon}>
               <Image
+                alt=""
                 src="/src/images/@global-header/calendar.svg"
                 width={36}
                 height={36}
@@ -163,11 +163,11 @@ const OptionButton = ({ isCalendar, isAvatar, onClick, imgSrc }) => {
           className={`${style.option_button} ${style.avatar}`}
           onClick={onClick}
         >
-          <Image src={imgSrc} width={40} height={40} />
+          <Image alt="" src={imgSrc} width={40} height={40} />
         </div>
       ) : (
         <div className={style.option_button} onClick={onClick}>
-          <Image src={imgSrc} width={26} height={26} />
+          <Image alt="" src={imgSrc} width={26} height={26} />
         </div>
       )}
     </>

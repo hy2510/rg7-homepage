@@ -1,11 +1,10 @@
 "use client";
 
-import styles from "./common-components.module.scss";
+import { Flamenco } from "next/font/google";
+import style from "./common-components.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-
-const style = styles;
 
 // 기본버튼
 export function Button({ color, shadow, roundFull, width, onClick, children }) {
@@ -48,6 +47,7 @@ export function BackLink({ href, largeFont, children }) {
       <Link href={href ? href : "/"}>
         <div className={style.back_link}>
           <Image
+            alt=""
             src="/src/images/arrow-icons/chv_left.svg"
             width={26}
             height={26}
@@ -68,6 +68,7 @@ export function AlertBar({ children }) {
       {children}
       <div className={style.delete_button}>
         <Image
+          alt=""
           src="/src/images/delete-icons/x_orange.svg"
           width={24}
           height={24}
@@ -106,28 +107,6 @@ export function AlertBox({
       </div>
     </div>
   );
-}
-
-// 필터 콘테이너
-export function FilterContainer({ children }) {
-  return (
-    <div className={style.fliter_container}>
-      <div className={style.filter_items}>{children}</div>
-      <div className={style.filter_button}>
-        <Image
-          src="/src/images/filter-icons/filter_blue.svg"
-          width={20}
-          height={20}
-        ></Image>
-        <div className={style.txt_l}>필터</div>
-      </div>
-    </div>
-  );
-}
-
-// 필터 아이템
-export function FilterItem({ children }) {
-  return <div className={style.filter_item}>{children}</div>;
 }
 
 // 텍스트필드
@@ -238,6 +217,7 @@ export function Dropdown({ inlineStyle, fontSizeM, title, children }) {
           {title}
         </div>
         <Image
+          alt=""
           src="/src/images/arrow-icons/chv_down.svg"
           width={20}
           height={20}
@@ -266,7 +246,15 @@ export function DropdownItem({ onClick, children }) {
 }
 
 // 모달 템플릿
-export function Modal({ compact, header, title, onClickDelete, children }) {
+export function Modal({
+  compact,
+  header,
+  title,
+  navTop,
+  backLink,
+  onClickDelete,
+  children,
+}) {
   return (
     <>
       <div className={style.modal}>
@@ -282,11 +270,27 @@ export function Modal({ compact, header, title, onClickDelete, children }) {
               </div>
               <button onClick={onClickDelete}>
                 <Image
+                  alt=""
                   src="/assets/images/icon/x/x_black.svg"
                   width="28"
                   height="28"
                 />
               </button>
+            </div>
+          )}
+          {navTop && (
+            <div className={style.nav_top}>
+              <div className={style.nav_top_back_link} onClick={onClickDelete}>
+                <div className={style.arrow_icon}>
+                  <Image
+                    alt=""
+                    src="/src/images/arrow-icons/chv_left.svg"
+                    width={26}
+                    height={26}
+                  />
+                </div>
+                <div className={style.txt_h}>{title}</div>
+              </div>
             </div>
           )}
           <div className={style.modal_body}>{children}</div>
@@ -295,4 +299,34 @@ export function Modal({ compact, header, title, onClickDelete, children }) {
       <div className={style.light_box} onClick={onClickDelete}></div>
     </>
   );
+}
+
+// 결과없음 메세지
+export function EmptyMessage({ isAward, children }) {
+  return (
+    <div className={style.empty_message}>
+      {isAward ? (
+        <Image
+          alt=""
+          src="/src/images/@empty-message/empty-award.svg"
+          width={156}
+          height={140}
+        />
+      ) : (
+        <Image
+          alt=""
+          src="/src/images/@empty-message/empty-board.svg"
+          width={156}
+          height={140}
+        />
+      )}
+
+      <div className={style.txt_p}>{children}</div>
+    </div>
+  );
+}
+
+// 커스텀 마진
+export function Margin({ height }) {
+  return <div style={{ marginBottom: `${height}px` }}></div>;
 }

@@ -1,9 +1,7 @@
-import styles from "./theme-list.module.scss";
+import style from "./theme-list.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import { AlertBar } from "@/components/common/common-components";
-
-const style = styles;
 
 // 학습메인 > 사용자의 학습레벨의 주제 리스트
 export function ThemeList({ children }) {
@@ -21,7 +19,13 @@ export function ThemeListItem({ themeImgSrc, href }) {
   return (
     <Link href={href ? href : "/"}>
       <div className={style.theme_list_item}>
-        <Image src={themeImgSrc} layout="intrinsic" width={400} height={200} />
+        <Image
+          alt=""
+          src={themeImgSrc}
+          layout="intrinsic"
+          width={400}
+          height={200}
+        />
       </div>
     </Link>
   );
