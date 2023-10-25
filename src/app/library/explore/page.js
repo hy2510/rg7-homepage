@@ -37,10 +37,12 @@ import {
   CourseItem,
   CourseList,
 } from "@/components/modules/library-explore-course-list/course-list";
+import { IntroChoodeLevel } from "@/components/modules/library-intro-choose-level/intro-choose-level";
 
 export default function Page() {
   return (
     <main className={`${style.explore} ${style.pc}`}>
+      {/* <IntroChoodeLevel /> */}
       {/* <PrekMode /> */}
       {/* <BookReadingMode /> */}
       <ChallengeMode />
@@ -239,5 +241,3 @@ const ChallengeMode = () => {
 };
 
 // 모듈: 코스 모드
-
-// 모듈: 레벨 선택

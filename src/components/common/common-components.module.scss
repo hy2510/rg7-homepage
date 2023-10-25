@@ -166,9 +166,10 @@
 .nav_container {
   display: flex;
   position: sticky;
-  top: 0;
+  top: 78px;
   z-index: 5;
   background-color: var(--white);
+  box-shadow: 10px 0 var(--white), -10px 0 var(--white);
   &::after {
     content: "";
     width: 100%;
@@ -365,7 +366,7 @@
   align-items: center;
   gap: var(--space-xxs);
   position: relative;
-  z-index: 4;
+  // z-index: 4;
   .title {
     font-size: var(--text-d-1);
     font-weight: 600;
@@ -396,10 +397,52 @@
 
 // 드랍다운 아이템
 .dropdown_item {
+  min-width: 200px;
   padding: var(--space-xs) var(--space-s);
   border-bottom: 2px solid var(--gray2);
   &:nth-last-child(1) {
     border-bottom: none;
+  }
+}
+
+// 텍스트필드
+.text_field {
+  border: 1.2px solid var(--gray2);
+  border-radius: var(--round-m);
+  padding: var(--space-s);
+  .txt_l {
+    font-size: var(--text-xs);
+    color: var(--gray1);
+  }
+  input {
+    width: 100%;
+    padding: var(--space-xxs) 0;
+  }
+}
+
+// 셀렉트박스
+.select_box {
+  border: 1.2px solid var(--gray2);
+  border-radius: var(--round-m);
+  padding: var(--space-s);
+  background-image: url("/src/images/arrow-icons/chev_down_gray.svg");
+  background-repeat: no-repeat;
+  background-position: center right 10px;
+  .txt_l {
+    font-size: var(--text-xs);
+    color: var(--gray1);
+  }
+  select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: inherit;
+    font-size: var(--text-m);
+    background: transparent;
+    border: 0 none;
+    outline: 0 none;
+    padding: var(--space-xxs) 0;
   }
 }
 
@@ -501,4 +544,13 @@
   .txt_p {
     color: var(--gray1);
   }
+}
+
+// 체크박스
+.check_box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
 }

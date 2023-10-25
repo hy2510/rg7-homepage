@@ -49,9 +49,12 @@ export function SetFilterModal({ _isActiveSetFilter }) {
   return (
     <Modal
       compact
-      navTop
+      header
       title="필터 설정"
       onClickDelete={() => {
+        _isActiveSetFilter(false);
+      }}
+      onClickLightbox={() => {
         _isActiveSetFilter(false);
       }}
     >

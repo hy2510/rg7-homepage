@@ -52,7 +52,7 @@ export default function Page() {
               isExportMode ? _isExportMode(false) : _isExportMode(true);
             }}
           >
-            {isDeleteMode ? null : isExportMode ? "작업 취소" : "내보내기"}
+            {isDeleteMode ? undefined : isExportMode ? "작업 취소" : "내보내기"}
           </div>
           <div
             className={style.txt_l}
@@ -60,7 +60,7 @@ export default function Page() {
               isDeleteMode ? _isDeleteMode(false) : _isDeleteMode(true);
             }}
           >
-            {isExportMode ? null : isDeleteMode ? "삭제 취소" : "삭제"}
+            {isExportMode ? undefined : isDeleteMode ? "삭제 취소" : "삭제"}
           </div>
         </div>
       </div>

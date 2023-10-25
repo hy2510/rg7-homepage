@@ -15,6 +15,9 @@ export default function Layout({ children }) {
         <Link href="/library/find/assignment/try-again">
           <NavItem active={false}>Try Again</NavItem>
         </Link>
+        <Link href="/library/find/assignment/favorite">
+          <NavItem active={false}>Favorite</NavItem>
+        </Link>
       </Nav>
       {children}
     </div>

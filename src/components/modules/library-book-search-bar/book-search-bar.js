@@ -10,13 +10,13 @@ const bookSearchBarCategoryData = [
     title: "기초 학습",
     comment: "PreK - 알파벳, 파닉스 배우기",
     image: "/src/images/@book-search-bar/dodo_abc.png",
-    link: "/",
+    link: "/library/find/study-prek",
   },
   {
     title: "기초 학습 (classic)",
     comment: "PreK - 알파벳, 파닉스 배우기",
     image: "/src/images/@book-search-bar/prek.svg",
-    link: "/",
+    link: "/library/find/study-prek",
   },
   {
     title: "영어 독서",

@@ -44,7 +44,7 @@ export function CourseItem({
             <div
               className={`${style.streak_front} ${
                 prevNum == -1
-                  ? null
+                  ? undefined
                   : studyData[prevNum].passed === "Y" && style.prev_passed
               }`}
             ></div>
@@ -74,15 +74,15 @@ export function CourseItem({
         <div
           className={`${style.cover} ${
             prevNum == -1
-              ? null
+              ? undefined
               : studyData[prevNum].passed === "Y" &&
                 studyData[currentNum].passed === "N"
               ? style.pulsate_fwd
-              : null
+              : undefined
           } ${
             currentNum == 0
               ? studyData[currentNum].passed === "N" && style.pulsate_fwd
-              : null
+              : undefined
           }`}
         >
           <Image
@@ -93,7 +93,7 @@ export function CourseItem({
             height={170}
             className={`${
               prevNum == -1
-                ? null
+                ? undefined
                 : studyData[prevNum].passed === "Y" &&
                   studyData[currentNum].passed === "N"
                 ? style.done
@@ -107,7 +107,7 @@ export function CourseItem({
         <div
           className={`${style.button} ${
             prevNum == -1
-              ? null
+              ? undefined
               : studyData[prevNum].passed === "Y" &&
                 studyData[currentNum].passed === "N"
               ? style.voca_download
@@ -117,7 +117,7 @@ export function CourseItem({
               ? studyData[currentNum].passed === "N"
                 ? style.voca_download
                 : style.voca_download_ready
-              : null
+              : undefined
           }`}
         >
           <Image
@@ -129,7 +129,7 @@ export function CourseItem({
         <div
           className={`${style.button} ${
             prevNum == -1
-              ? null
+              ? undefined
               : studyData[prevNum].passed === "Y" &&
                 studyData[currentNum].passed === "N"
               ? style.start
@@ -137,7 +137,7 @@ export function CourseItem({
           } ${studyData[currentNum].passed === "Y" && style.review} ${
             currentNum == 0
               ? studyData[currentNum].passed === "N" && style.start
-              : null
+              : undefined
           }`}
         >
           {studyData[currentNum].passed === "Y" ? "복습" : "시작"}

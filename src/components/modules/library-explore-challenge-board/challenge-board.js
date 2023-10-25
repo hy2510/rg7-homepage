@@ -1,5 +1,10 @@
+"use client";
+
+import { Modal } from "@/components/common/common-components";
 import style from "./challenge-board.module.scss";
 import Image from "next/image";
+import { useState } from "react";
+import Link from "next/link";
 
 // 영어독서왕 스코어보드
 export function ChallengeBoard({
@@ -20,8 +25,8 @@ export function ChallengeBoard({
       </div>
       <div className={style.body}>
         <MyGoal
-          trophyImgSrc="/src/images/@challenge-board/trophy.png"
-          goalName="우수상"
+          trophyImgSrc="/src/images/@challenge-board/sincerity_lg.svg"
+          goalName="성실상"
         />
         <MyProgress />
       </div>
@@ -37,26 +42,118 @@ export function MyGoal({
   goalPoint,
   onClick,
 }) {
+  const [isSetMygoalActive, _isSetMygoalActive] = useState(false);
+
   return (
-    <div className={style.my_goal}>
-      <div className={style.txt_h}>나의 목표</div>
-      <div className={style.goal}>
-        <Image alt="" alt="" src={trophyImgSrc} width={100} height={120} />
-        <div className={style.goal_container}>
-          <div className={style.goal_name}>{goalName}</div>
-          <button onClick={onClick}>
-            <Image
-              alt=""
-              src="/src/images/pencil-icons/pencil_gray.svg"
-              width={20}
-              height={20}
-            />
-          </button>
+    <>
+      <div className={style.my_goal}>
+        <div className={style.txt_h}>나의 목표</div>
+        <div className={style.goal}>
+          <Image alt="" src={trophyImgSrc} width={100} height={120} />
+          <div className={style.goal_container}>
+            <div className={style.goal_name}>{goalName}</div>
+            <button
+              onClick={() => {
+                _isSetMygoalActive(true);
+              }}
+            >
+              <Image
+                alt=""
+                src="/src/images/pencil-icons/pencil_gray.svg"
+                width={20}
+                height={20}
+              />
+            </button>
+          </div>
+          <ul className={style.goal_info}>
+            <li>• 대회 기간 동안 학습일수 {goalDays}일 이상 참여</li>
+            <li>• 포인트 {goalPoint}P 이상 획득</li>
+          </ul>
+          <section>
+            <div className={`${style.air} ${style.air1}`}></div>
+            <div className={`${style.air} ${style.air2}`}></div>
+            <div className={`${style.air} ${style.air3}`}></div>
+            <div className={`${style.air} ${style.air4}`}></div>
+          </section>
         </div>
-        <ul className={style.goal_info}>
-          <li>• 대회 기간 동안 학습일수 {goalDays}일 이상</li>
-          <li>• 포인트 {goalPoint}P 이상 획득</li>
-        </ul>
+      </div>
+      {isSetMygoalActive && (
+        <SetMyGoal _isSetMygoalActive={_isSetMygoalActive} />
+      )}
+    </>
+  );
+}
+
+// 영어독서왕 스코어보드 > 나의목표 > 목표설정 팝업
+export function SetMyGoal({ _isSetMygoalActive }) {
+  return (
+    <Modal
+      compact
+      header
+      title="영어독서왕 목표 설정"
+      onClickDelete={() => {
+        _isSetMygoalActive(false);
+      }}
+    >
+      <div className={style.set_my_goal}>
+        <SetMyGoalItem
+          imgSrc="/src/images/@challenge-board/best_lg.svg"
+          title="대상"
+          exp="6,500포인트 이상 + 학습일수 80일 이상"
+          active
+        />
+        <SetMyGoalItem
+          imgSrc="/src/images/@challenge-board/grand_lg.svg"
+          title="최우수상"
+          exp="6,500포인트 이상 + 학습일수 80일 이상"
+        />
+        <SetMyGoalItem
+          imgSrc="/src/images/@challenge-board/excellence_lg.svg"
+          title="우수상"
+          exp="6,500포인트 이상 + 학습일수 80일 이상"
+        />
+        <SetMyGoalItem
+          imgSrc="/src/images/@challenge-board/sincerity_lg.svg"
+          title="성실상"
+          exp="6,500포인트 이상 + 학습일수 80일 이상"
+        />
+        <Link
+          href="/"
+          target="_blank"
+          className="color-blue bold-1 text-align-center"
+        >
+          영어독서왕 시상 안내
+        </Link>
+      </div>
+    </Modal>
+  );
+}
+
+// 영어독서왕 스코어보드 > 나의목표 > 목표설정 아이템
+export function SetMyGoalItem({ imgSrc, title, exp, active }) {
+  return (
+    <div className={`${style.set_my_goal_item} ${active && style.active}`}>
+      <div className={style.col_a}>
+        {active ? (
+          <Image
+            src="/src/images/radio-icons/radio_on.svg"
+            width={20}
+            height={20}
+          />
+        ) : (
+          <Image
+            src="/src/images/radio-icons/radio_off.svg"
+            width={20}
+            height={20}
+          />
+        )}
+      </div>
+      <div className={style.col_b}>
+        <Image src={imgSrc} width={80} height={80} />
+      </div>
+      <div className={style.col_c}>
+        <div className={style.txt_h}>{title}</div>
+        <div className={style.txt_p}>{exp}</div>
       </div>
     </div>
   );
@@ -72,19 +169,19 @@ export function MyProgress() {
           isDday
           currentDday={80}
           recommendDailyPoints={30.1}
-          progressWidth={10}
+          progressWidth={50}
         />
         <ChallengeProgress
           isStudyDay
           currentStudyDays={2}
           finalStudyDays={60}
-          progressWidth={10}
+          progressWidth={50}
         />
         <ChallengeProgress
           isEarnPoint
           currentEarnPoint={10.2}
           finalGoalPoint={2000}
-          progressWidth={10}
+          progressWidth={50}
         />
       </div>
     </div>

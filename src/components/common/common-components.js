@@ -93,7 +93,7 @@ export function AlertBox({
           ? style.tool_tip_right_arrow
           : toolTipLeft
           ? style.tool_tip_left_arrow
-          : null
+          : undefined
       }`}
     >
       <div className={style.txt_l}>{text}</div>
@@ -114,7 +114,7 @@ export function TextFiled(props) {
   return (
     <div
       className={`text-field ${props.border} ${
-        props.disabled ? "disabled" : null
+        props.disabled ? "disabled" : undefined
       }`}
       style={{ width: props.width }}
     >
@@ -147,7 +147,7 @@ export function NavItem({ active, onClick, width, children, toolTip }) {
       <div className={style.nav_contents}>
         <span>
           {children}
-          {toolTip == null ? null : (
+          {toolTip == undefined ? undefined : (
             <div className={style.tool_tip}>{toolTip}</div>
           )}
         </span>
@@ -179,7 +179,7 @@ export function Pagination({ children }) {
 export function PaginationItem({ active, onClick, children }) {
   return (
     <li className={`${style.pagination_item} ${active && style.on}`}>
-      <button onClick={onClick ? onClick : null}>{children}</button>
+      <button onClick={onClick ? onClick : undefined}>{children}</button>
     </li>
   );
 }
@@ -245,6 +245,40 @@ export function DropdownItem({ onClick, children }) {
   );
 }
 
+// 텍스트필드
+export function TextField({ id, hint }) {
+  const [onKey, _onKey] = useState(false);
+
+  return (
+    <div className={style.text_field}>
+      <div className={style.txt_l}>{onKey && hint}</div>
+      <input
+        id={id}
+        type="text"
+        placeholder={onKey ? null : hint}
+        onKeyUp={() => {
+          _onKey(true);
+        }}
+      />
+    </div>
+  );
+}
+
+// 셀렉트박스
+export function SelectBox({ id, hint, children }) {
+  return (
+    <div className={style.select_box}>
+      <div className={style.txt_l}>{hint}</div>
+      <select id={id}>{children}</select>
+    </div>
+  );
+}
+
+// 셀렉트박스 아이템
+export const SelectBoxItem = ({ value, children }) => (
+  <option value={value}>{children}</option>
+);
+
 // 모달 템플릿
 export function Modal({
   compact,
@@ -253,6 +287,8 @@ export function Modal({
   navTop,
   backLink,
   onClickDelete,
+  onClickBack,
+  onClickLightbox,
   children,
 }) {
   return (
@@ -271,7 +307,7 @@ export function Modal({
               <button onClick={onClickDelete}>
                 <Image
                   alt=""
-                  src="/assets/images/icon/x/x_black.svg"
+                  src="/src/images/delete-icons/x_black.svg"
                   width="28"
                   height="28"
                 />
@@ -280,7 +316,7 @@ export function Modal({
           )}
           {navTop && (
             <div className={style.nav_top}>
-              <div className={style.nav_top_back_link} onClick={onClickDelete}>
+              <div className={style.nav_top_back_link} onClick={onClickBack}>
                 <div className={style.arrow_icon}>
                   <Image
                     alt=""
@@ -296,7 +332,7 @@ export function Modal({
           <div className={style.modal_body}>{children}</div>
         </div>
       </div>
-      <div className={style.light_box} onClick={onClickDelete}></div>
+      <div className={style.light_box} onClick={onClickLightbox}></div>
     </>
   );
 }
@@ -322,6 +358,27 @@ export function EmptyMessage({ isAward, children }) {
       )}
 
       <div className={style.txt_p}>{children}</div>
+    </div>
+  );
+}
+
+// 체크박스
+export function CheckBox({ id, check }) {
+  return (
+    <div id={id} className={style.check_box}>
+      {check ? (
+        <Image
+          src="/src/images/check-icons/check_box_on.svg"
+          width={18}
+          height={18}
+        />
+      ) : (
+        <Image
+          src="/src/images/check-icons/check_box_off.svg"
+          width={18}
+          height={18}
+        />
+      )}
     </div>
   );
 }

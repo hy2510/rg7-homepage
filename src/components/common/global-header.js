@@ -3,48 +3,81 @@
 import style from "./global-header.module.scss";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { CalendarModal, MyRgModal } from "./global-option";
 
 // 공통상단
 export default function Gheader({ children }) {
+  const logOnStatus = true;
+  const pathname = usePathname();
+  const connectHome = pathname.indexOf("home") != -1;
+  const connectAbout = pathname.indexOf("about") != -1;
+  const connectTrial = pathname.indexOf("trial") != -1;
+  const connectLibrary = pathname.indexOf("library") != -1;
+  const connectReview = pathname.indexOf("review") != -1;
+  const connectRanking = pathname.indexOf("ranking") != -1;
+  const [viewCalendarModal, _viewCalendarModal] = useState(false);
+  const [viewMyRgModal, _viewMyRgModal] = useState(false);
+
   return (
-    <div className={style.global_header}>
-      <div className={`${style.global_header_container} container`}>
-        <div className={style.company_logo}>
-          <Image
-            alt=""
-            src="/src/images/@global-header/company_logo_white.svg"
-            width={48}
-            height={40}
-          />
+    <>
+      <div className={style.global_header}>
+        <div className={`${style.global_header_container} container`}>
+          <div className={style.company_logo}>
+            <Image
+              alt=""
+              src="/src/images/@global-header/company_logo_white.svg"
+              width={48}
+              height={40}
+            />
+          </div>
+          {logOnStatus ? (
+            <GnbLogOn
+              connectHome={connectHome}
+              connectLibrary={connectLibrary}
+              connectReview={connectReview}
+              connectRanking={connectRanking}
+              _viewCalendarModal={_viewCalendarModal}
+              _viewMyRgModal={_viewMyRgModal}
+            />
+          ) : (
+            <GnbLogOff
+              connectHome={connectHome}
+              connectAbout={connectAbout}
+              connectTrial={connectTrial}
+            />
+          )}
         </div>
-        <GnbLogOn />
-        {/* <GnbLogOff /> */}
       </div>
-    </div>
+      {viewCalendarModal && (
+        <CalendarModal _viewCalendarModal={_viewCalendarModal} />
+      )}
+      {viewMyRgModal && <MyRgModal _viewMyRgModal={_viewMyRgModal} />}
+    </>
   );
 }
 
 // 공통상단 > 로그오프 상태의 메뉴
-const GnbLogOff = () => {
+const GnbLogOff = ({ connectHome, connectAbout, connectTrial }) => {
   return (
     <>
       <div className={style.gnb_log_off}>
         <GnbButton
-          active={true}
-          href="/home/news"
+          active={connectHome}
+          href="/home"
           imgSrc="/src/images/@global-header/home.svg"
           menuName="홈"
         />
         <GnbButton
-          active={false}
-          href="/"
+          active={connectAbout}
+          href="/about"
           imgSrc="/src/images/@global-header/about_rg.svg"
           menuName="소개"
         />
         <GnbButton
-          active={false}
-          href="/"
+          active={connectTrial}
+          href="/trial"
           imgSrc="/src/images/@global-header/trial.svg"
           menuName="체험"
         />
@@ -58,50 +91,62 @@ const GnbLogOff = () => {
 };
 
 // 공통상단 > 로그온 상태의 메뉴
-const GnbLogOn = () => {
+const GnbLogOn = ({
+  connectHome,
+  connectLibrary,
+  connectReview,
+  connectRanking,
+  _viewCalendarModal,
+  _viewMyRgModal,
+}) => {
   const userAvatarImage =
     "https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/dodo_03.png";
-  const [isCalendarModalAct, _isCalendarModalAct] = useState(false);
-  const [isStreakModalAct, _isStreakModalAct] = useState(false);
-  const [isQuestModalAct, _isQuestModalAct] = useState(false);
-  const [isAlarmModalAct, _isAlarmModalAct] = useState(false);
-  const [isMyRgModalAct, _isMyRgModalAct] = useState(false);
-  const [isMyRgItemsAct, _isMyRgItemsAct] = useState(0); // 0: My RG 메인, 1: 프로필, 2: 일일 목표, 3: 나의 학습 레벨
 
   return (
     <>
       <div className={style.gnb_log_on}>
         <GnbButton
-          active={true}
-          href="/"
+          active={connectHome}
+          href="/home"
           imgSrc="/src/images/@global-header/home.svg"
           menuName="홈"
         />
         <GnbButton
-          active={false}
-          href="/"
+          active={connectLibrary}
+          href="/library/explore"
           imgSrc="/src/images/@global-header/study_room.svg"
           menuName="학습"
         />
         <GnbButton
-          active={false}
-          href="/"
+          active={connectReview}
+          href="/review"
           imgSrc="/src/images/@global-header/review.svg"
           menuName="리뷰"
         />
         <GnbButton
-          active={false}
-          href="/"
+          active={connectRanking}
+          href="/ranking"
           imgSrc="/src/images/@global-header/ranking.svg"
           menuName="랭킹"
         />
       </div>
       <div className={style.option_buttons}>
-        <OptionButton isCalendar />
+        <OptionButton
+          isCalendar
+          onClick={() => {
+            _viewCalendarModal(true);
+          }}
+        />
         <OptionButton imgSrc="/src/images/@global-header/streak.svg" />
         <OptionButton imgSrc="/src/images/@global-header/quest.svg" />
         <OptionButton imgSrc="/src/images/@global-header/notice.svg" />
-        <OptionButton isAvatar imgSrc={userAvatarImage} />
+        <OptionButton
+          isAvatar
+          imgSrc={userAvatarImage}
+          onClick={() => {
+            _viewMyRgModal(true);
+          }}
+        />
       </div>
     </>
   );

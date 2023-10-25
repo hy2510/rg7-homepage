@@ -20,10 +20,14 @@ export default function Gfooter() {
           <div>B2B</div>
         </div>
         <div className={style.row_c}>
-          경기도 성남시 수정구 창업로 43, A동 807~810호 (판교 글로벌비즈 센터)
+          <div>
+            경기도 성남시 수정구 창업로 43, A동 807~810호 (판교 글로벌비즈 센터)
+          </div>
           <br />
-          대표이사 김용환 ㅣ 사업자 등록 번호 119-86-01044 ㅣ FAX :
-          070-0826-8660 ㅣ Mail : rgmanager@readinggate.com
+          <div>
+            대표이사 김용환 ㅣ 사업자 등록 번호 119-86-01044 ㅣ FAX :
+            070-0826-8660 ㅣ Mail : rgmanager@readinggate.com
+          </div>
         </div>
       </div>
     </div>

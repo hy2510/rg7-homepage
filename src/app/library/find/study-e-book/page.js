@@ -23,7 +23,7 @@ export default function Page() {
       <BackLink href="/library/explore" largeFont>
         eBook
       </BackLink>
-      <StudyLevelSelector />
+      <StudyLevelSelector eb level="KA" />
       <BookList
         count={50}
         isExportMode={isExportMode}

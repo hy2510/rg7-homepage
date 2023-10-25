@@ -68,14 +68,14 @@ export function BookCover({
           <div className={style.book_image}>
             {isExportMode || isDeleteMode ? (
               <div
-                className={style.check_box}
+                className={`${style.check_box} ${style.swirl_in_bck}`}
                 id={id}
                 onClick={() => {
                   onClickCheck
                     ? isCheckActive
                       ? _isCheckActive(false) // 체크박스 체크시 일괄 작업 실행 명령어가 들어갈 자리
                       : _isCheckActive(true)
-                    : null;
+                    : undefined;
                 }}
               >
                 {isCheckActive ? (
@@ -92,7 +92,7 @@ export function BookCover({
                   />
                 )}
               </div>
-            ) : null}
+            ) : undefined}
             {hasMovieSrc && (
               <div className={style.movie_icon}>
                 <Image
@@ -172,6 +172,9 @@ export function BookInfoModal({
       onClickDelete={() => {
         _isBookInfoActive(false);
       }}
+      onClickLightbox={() => {
+        _isBookInfoActive(false);
+      }}
     >
       <div className={style.book_info_modal}>
         <div
@@ -220,7 +223,9 @@ export function BookInfoModal({
                           }}
                         />
                       </div>
-                    ) : null
+                    ) : (
+                      <></>
+                    )
                   ) : isFavoriteCheck ? (
                     <div className={style.alert}>
                       <AlertBox
@@ -235,7 +240,9 @@ export function BookInfoModal({
                         }}
                       />
                     </div>
-                  ) : null}
+                  ) : (
+                    <></>
+                  )}
                 </div>
                 <addFavoriteButton />
                 <div className={style.add_todo}>
@@ -277,7 +284,9 @@ export function BookInfoModal({
                           }}
                         />
                       </div>
-                    ) : null
+                    ) : (
+                      <></>
+                    )
                   ) : isToDoCheck ? (
                     <div className={style.alert}>
                       <AlertBox
@@ -292,7 +301,9 @@ export function BookInfoModal({
                         }}
                       />
                     </div>
-                  ) : null}
+                  ) : (
+                    <></>
+                  )}
                 </div>
               </div>
             </div>
