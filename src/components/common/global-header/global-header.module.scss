@@ -90,6 +90,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
   &.avatar {
     img {
       border: 2px solid var(--white);
@@ -137,6 +138,39 @@
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+  }
+  .new_dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--red);
+    border-radius: var(--round-full);
+    position: absolute;
+    top: 0;
+    right: 0;
+    -webkit-animation: blink-1 2s infinite both;
+    animation: blink-1 2s infinite both;
+  }
+  @-webkit-keyframes blink-1 {
+    0%,
+    50%,
+    100% {
+      opacity: 1;
+    }
+    25%,
+    75% {
+      opacity: 0;
+    }
+  }
+  @keyframes blink-1 {
+    0%,
+    50%,
+    100% {
+      opacity: 1;
+    }
+    25%,
+    75% {
+      opacity: 0;
     }
   }
 }

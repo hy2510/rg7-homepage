@@ -44,8 +44,8 @@ export default function Page() {
     <main className={`${style.explore} ${style.pc}`}>
       {/* <IntroChoodeLevel /> */}
       {/* <PrekMode /> */}
-      {/* <BookReadingMode /> */}
-      <ChallengeMode />
+      <BookReadingMode />
+      {/* <ChallengeMode /> */}
     </main>
   );
 }
@@ -115,10 +115,26 @@ const BookReadingMode = () => {
         </PaginationItem>
       </Pagination>
       <SeriesList>
-        <SeriesItem seriesImgSrc="/src/sample-images/series_sample.png" />
-        <SeriesItem seriesImgSrc="/src/sample-images/series_sample.png" />
-        <SeriesItem seriesImgSrc="/src/sample-images/series_sample.png" />
-        <SeriesItem seriesImgSrc="/src/sample-images/series_sample.png" />
+        <SeriesItem
+          seriesName="Sample Series"
+          seriesImgSrc="/src/sample-images/series-sample/10_minute_classics.png"
+          theme="gray"
+        />
+        <SeriesItem
+          seriesName="Sample Series"
+          seriesImgSrc="/src/sample-images/series-sample/20_shakespeare_Children_s_stories.png"
+          theme="dark_green"
+        />
+        <SeriesItem
+          seriesName="Sample Series"
+          seriesImgSrc="/src/sample-images/series-sample/animal_tales.png"
+          theme="purple"
+        />
+        <SeriesItem
+          seriesName="Sample Series"
+          seriesImgSrc="/src/sample-images/series-sample/bible_stories.png"
+          theme="blue"
+        />
       </SeriesList>
       <ThemeList>
         <ThemeListItem themeImgSrc="/src/sample-images/theme_sample.png" />

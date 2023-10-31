@@ -13,14 +13,3 @@
     gap: var(--space-m);
   }
 }
-
-// 학습메인 > 사용자의 학습레벨의 시리즈 아이템
-.series_list_item {
-  width: 100%;
-  min-height: 200px;
-  display: flex;
-  align-items: end;
-  img {
-    border-radius: var(--round-m);
-  }
-}

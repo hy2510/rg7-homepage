@@ -5,7 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { CalendarModal, MyRgModal } from "./global-option";
+import { CalendarModal } from "../global-option-calendar/global-option-calendar";
+import { MyRgModal } from "../global-option-my-rg/global-option-my-rg";
+import { StreakModal } from "../global-option-streak/global-option-streak";
+import { QuestModal } from "../global-option-quest/global-option-quest";
+import { NoticeModal } from "../global-option-notice/global-option-notice";
 
 // 공통상단
 export default function Gheader({ children }) {
@@ -19,6 +23,9 @@ export default function Gheader({ children }) {
   const connectRanking = pathname.indexOf("ranking") != -1;
   const [viewCalendarModal, _viewCalendarModal] = useState(false);
   const [viewMyRgModal, _viewMyRgModal] = useState(false);
+  const [viewStreakModal, _viewStreakModal] = useState(false);
+  const [viewQuestModal, _viewQuestModal] = useState(false);
+  const [viewNoticeModal, _viewNoticeModal] = useState(false);
 
   return (
     <>
@@ -40,6 +47,9 @@ export default function Gheader({ children }) {
               connectRanking={connectRanking}
               _viewCalendarModal={_viewCalendarModal}
               _viewMyRgModal={_viewMyRgModal}
+              _viewStreakModal={_viewStreakModal}
+              _viewQuestModal={_viewQuestModal}
+              _viewNoticeModal={_viewNoticeModal}
             />
           ) : (
             <GnbLogOff
@@ -54,6 +64,9 @@ export default function Gheader({ children }) {
         <CalendarModal _viewCalendarModal={_viewCalendarModal} />
       )}
       {viewMyRgModal && <MyRgModal _viewMyRgModal={_viewMyRgModal} />}
+      {viewStreakModal && <StreakModal _viewStreakModal={_viewStreakModal} />}
+      {viewQuestModal && <QuestModal _viewQuestModal={_viewQuestModal} />}
+      {viewNoticeModal && <NoticeModal _viewNoticeModal={_viewNoticeModal} />}
     </>
   );
 }
@@ -98,6 +111,9 @@ const GnbLogOn = ({
   connectRanking,
   _viewCalendarModal,
   _viewMyRgModal,
+  _viewStreakModal,
+  _viewQuestModal,
+  _viewNoticeModal,
 }) => {
   const userAvatarImage =
     "https://wcfresource.a1edu.com/newsystem/image/character/maincharacter/dodo_03.png";
@@ -137,9 +153,25 @@ const GnbLogOn = ({
             _viewCalendarModal(true);
           }}
         />
-        <OptionButton imgSrc="/src/images/@global-header/streak.svg" />
-        <OptionButton imgSrc="/src/images/@global-header/quest.svg" />
-        <OptionButton imgSrc="/src/images/@global-header/notice.svg" />
+        <OptionButton
+          imgSrc="/src/images/@global-header/streak.svg"
+          onClick={() => {
+            _viewStreakModal(true);
+          }}
+        />
+        <OptionButton
+          imgSrc="/src/images/@global-header/quest.svg"
+          onClick={() => {
+            _viewQuestModal(true);
+          }}
+        />
+        <OptionButton
+          imgSrc="/src/images/@global-header/notice.svg"
+          onClick={() => {
+            _viewNoticeModal(true);
+          }}
+          isNotice={true}
+        />
         <OptionButton
           isAvatar
           imgSrc={userAvatarImage}
@@ -165,7 +197,7 @@ const GnbButton = ({ menuName, active, href, imgSrc }) => {
 };
 
 // 옵션 버튼
-const OptionButton = ({ isCalendar, isAvatar, onClick, imgSrc }) => {
+const OptionButton = ({ isCalendar, isAvatar, isNotice, onClick, imgSrc }) => {
   const date = new Date();
   const today = ("0" + date.getDate()).slice(-2);
   const monthNames = [
@@ -212,6 +244,8 @@ const OptionButton = ({ isCalendar, isAvatar, onClick, imgSrc }) => {
         </div>
       ) : (
         <div className={style.option_button} onClick={onClick}>
+          {/* 새로운 알림이 있을 때 표시되는 점 */}
+          {isNotice && <div className={style.new_dot}></div>}
           <Image alt="" src={imgSrc} width={26} height={26} />
         </div>
       )}

@@ -8,6 +8,7 @@ import { BookList } from "@/components/modules/library-find-book-list/book-list"
 import bookData from "@/app/library/sample-data-book-finder.json";
 import Image from "next/image";
 import { BookCover } from "@/components/modules/library-book-cover/book-cover";
+import { LibraryFindTop } from "@/components/modules/library-find-top/library-find-top";
 
 export default function Page() {
   return (
@@ -15,7 +16,10 @@ export default function Page() {
       <BackLink href="/library/explore" largeFont>
         시리즈
       </BackLink>
-      <div>[시리즈 상단]</div>
+      <LibraryFindTop
+        title="Sample Series"
+        imgSrc="/src/sample-images/series-sample/20_shakespeare_Children_s_stories.png"
+      />
       <BookList count={50}>
         {bookData.map((a, i) => {
           return (

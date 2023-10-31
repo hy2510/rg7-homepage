@@ -185,11 +185,14 @@ export function PaginationItem({ active, onClick, children }) {
 }
 
 // 프로그레스바 (width: 프로그레스 길이 -> %로 표시, check: 체크포인트가 있는 경우, toolTip: 체크 포인트의 툴팁)
-export function ProgressBar({ width, check, toolTip }) {
+export function ProgressBar({ width, check, slim, toolTip }) {
   return (
-    <div className={style.progress_bar}>
-      <div className={style.progress} style={{ width: width }}>
-        <div className={style.pointer}>{width}</div>
+    <div className={`${style.progress_bar} ${slim && style.slim}`}>
+      <div
+        className={`${style.progress} ${slim && style.slim}`}
+        style={{ width: width }}
+      >
+        {!slim && <div className={style.pointer}>{width}</div>}
       </div>
       {check && (
         <div className={style.check} style={{ width: check }}>
